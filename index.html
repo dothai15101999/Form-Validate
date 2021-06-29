@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+  </head>
+
+  <body>
+    <div class="ticket">
+      <form class="ticket-sign" id="form-1">
+        <div class="title">
+          <h2>Đăng ký thành viên</h2>
+          <span class="slogan">Cộng đồng đầu tư và thịnh vượng</span>
+        </div>
+  
+        <div class="box">
+          <label for="fullname">Tên đầy đủ</label><br/>
+          <input id="fullname" name="fullname" type="text" placeholder="VD: Hong Thai"/>
+          <span class="message"></span>
+        </div>
+  
+        <div class="box">
+          <label for="email">Email</label><br/>
+          <input id="email" name="email"  type="text" placeholder="VD: dothai@gmail.com"/>
+          <span class="message"></span>
+        </div>
+  
+        <div class="box">
+          <label for="password">Mật khẩu</label><br/>
+          <input id="password" name="password" type="password" placeholder="Nhập mật khẩu"/>
+          <span class="message"></span>
+        </div>
+  
+        <div class="box">
+          <label for="password_confirm">Nhập lại mật khẩu</label><br/>
+          <input id="password_confirm" name="password_confirm" type="password" placeholder="Nhập lại mật khẩu"/>
+          <span class="message"></span>
+        </div>
+        
+        <div>
+          <button type="submit" class="btn">Đăng ký</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="./script.js"></script>
+
+    <script>
+      Validator ({
+        form: '#form-1',
+        formGroupSelector: '.box',
+        errorSelector: '.message',
+        rules: [
+          Validator.isRequired('#fullname'),
+          Validator.isRequired('#email'),
+          Validator.isEmail('#email'),
+          Validator.minLength('#password', 6),
+          Validator.isRequired('#password_confirm'),
+          Validator.isConfirmed('#password_confirm', function (){
+            return document.querySelector('#form-1 #password').value;
+          }, 'Mật khẩu nhập lại không chính xác'),
+        ],
+        onSubmit: function (data) {
+          console.log(data);
+        }
+      });
+    </script>
+  </body> 
+
+</html>
